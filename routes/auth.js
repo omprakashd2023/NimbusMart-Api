@@ -25,7 +25,15 @@ authRouter.post("/signup", async (req, res) => {
     });
 
     user = await user.save();
-    res.status(200).json(user);
+    const token = jwt.sign(
+      {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      },
+      process.env.JWT_SECRET
+    );
+    res.status(200).json({ token, ...user._doc });
   } catch (e) {
     console.log(e);
     res
@@ -53,7 +61,7 @@ authRouter.post("/signin", async (req, res) => {
       },
       process.env.JWT_SECRET
     );
-    res.json({ token, ...user._doc });
+    res.status(200).json({ token, ...user._doc });
   } catch (err) {
     console.log(err);
     res
