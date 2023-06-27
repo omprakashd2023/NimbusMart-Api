@@ -15,6 +15,7 @@ const MONGO_DB_URL = `mongodb+srv://${MONGODB_USERNAME}:${MONGODB_PASSWORD}@clus
 
 //Routes
 const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
 
 const app = express();
 
@@ -36,6 +37,7 @@ mongoose
 
 //Auth Routes
 app.use("/api", authRouter);
+app.use("/api/admin", adminRouter);
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running at PORT:${PORT}`);
