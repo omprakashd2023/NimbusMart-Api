@@ -12,4 +12,16 @@ productRouter.get(
   productController.searchProductController
 );
 
+productRouter.get(
+  "/get-products",
+  auth,
+  productController.getProductsController
+);
+
+productRouter.post(
+  "/rate-product",
+  auth,
+  productController.rateProductController
+);
+
 module.exports = productRouter;
