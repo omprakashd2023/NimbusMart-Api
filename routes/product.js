@@ -24,4 +24,6 @@ productRouter.post(
   productController.rateProductController
 );
 
+productRouter.get("/deal-of-the-day", auth, productController.getDealOfTheDay);
+
 module.exports = productRouter;

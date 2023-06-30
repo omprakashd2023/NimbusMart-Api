@@ -55,3 +55,18 @@ module.exports.rateProductController = async (req, res) => {
       .json({ error: "Something went wrong!", reason: err.toString() });
   }
 };
+
+module.exports.getDealOfTheDay = async (req, res) => {
+  try {
+    let products = await Product.find()
+      .sort({ avgRating: -1, "rating.lenth": -1 })
+      .limit(1);
+    console.log(products);
+    res.status(200).json({ product: products[0] });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(500)
+      .json({ error: "Something went wrong!", reason: err.toString() });
+  }
+};
